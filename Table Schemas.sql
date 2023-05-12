@@ -5,10 +5,10 @@ CREATE TABLE employees (
     emp_no INTEGER PRIMARY KEY,
     emp_title_id CHAR(5),
     birth_date DATE,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
+    first_name VARCHAR(35) NOT NULL,
+    last_name VARCHAR(35) NOT NULL,
     sex CHAR(1),
-    hire_date DATE
+    hire_date DATE NOT NULL
 );
 
 CREATE TABLE dept_manager (
@@ -20,13 +20,13 @@ CREATE TABLE dept_manager (
 
 CREATE TABLE titles (
     title_id CHAR(5) PRIMARY KEY,
-    title VARCHAR(100)
+    title VARCHAR(35)
 );
 
 
 CREATE TABLE departments (
     dept_no CHAR(4) PRIMARY KEY,
-    dept_name VARCHAR(100)
+    dept_name VARCHAR(35)
 );
 
 CREATE TABLE dept_emp (
@@ -39,7 +39,7 @@ CREATE TABLE dept_emp (
 
 CREATE TABLE salaries (
     emp_no INTEGER,
-    salary NUMERIC(10, 2),
+    salary NUMERIC(12, 2),
     PRIMARY KEY (emp_no, salary),
     FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
