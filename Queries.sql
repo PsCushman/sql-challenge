@@ -19,7 +19,7 @@ FROM employees;
 
 SELECT first_name, last_name, hire_date
 FROM employees
-WHERE hire_date >= DATE '1986-01-01' AND hire_date <= DATE '1986-12-31';
+WHERE hire_date BETWEEN DATE '1986-01-01' AND DATE '1986-12-31';
 
 --List the manager of each department along with their department number, 
 --department name, employee number, last name, and first name.
@@ -31,20 +31,19 @@ SELECT
   employees.last_name,
   employees.first_name
 FROM
-  departments, dept_manager, employees
-WHERE
-  departments.dept_no = dept_manager.dept_no
-AND dept_manager.emp_no = employees.emp_no;
+  departments
+INNER JOIN dept_manager ON departments.dept_no = dept_manager.dept_no
+INNER JOIN employees ON dept_manager.emp_no = employees.emp_no;
   
---List the department number for each employee along with that 
+--List the department number for each employee along with the 
 --employee’s employee number, last name, first name, and department name.  
 
 SELECT emp.emp_no, emp.last_name, emp.first_name,
 dept.dept_no,
 dept.dept_name
 FROM employees emp
-JOIN dept_emp ON emp.emp_no = dept_emp.emp_no
-JOIN departments dept ON dept_emp.dept_no = dept.dept_no;
+INNER JOIN dept_emp ON emp.emp_no = dept_emp.emp_no
+INNER JOIN departments dept ON dept_emp.dept_no = dept.dept_no;
 
 --List first name, last name, and sex of each employee whose 
 --first name is Hercules and whose last name begins with the letter B.
